@@ -1,0 +1,20 @@
+version: '3'
+services:
+  go-client:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - ethereum
+      - ipfs
+
+  ethereum:
+    image: trufflesuite/ganache-cli
+    ports:
+      - "8545:8545"
+    command: ["--host", "0.0.0.0", "--port", "8545", "--networkId", "5777"]
+
+  ipfs:
+    image: ipfs/go-ipfs
+    ports:
+      - "5001:5001"
